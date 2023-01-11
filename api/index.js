@@ -2,16 +2,19 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const authRoute = require("./routes/auth");
 
 dotenv.config();
+app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL)
-.then(console.log("Connected to MongoDB"))
-.catch((err) => console.log(err));
+    .then(console.log("Connected to MongoDB"))
+    .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-    res.json("this is main url")
-    console.log("this is main url")
+app.use("/api/auth", authRoute);
+
+app.get("/test", (req, res) => {
+    res.json("test")
 })
 
 app.listen("5000", () => {
