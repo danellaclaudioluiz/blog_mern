@@ -4,9 +4,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 //REGISTER
-
-const Cat = mongoose.model('Cat', { name: String });
-
 router.post("/register", async(req, res) => {
     try {
         const salt = await bcrypt.genSalt(10);
@@ -28,7 +25,6 @@ router.post("/register", async(req, res) => {
 })
 
 //LOGIN
-
 router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({
